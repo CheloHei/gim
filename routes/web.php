@@ -29,7 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::get('/people',[PeopleController::class,'index'])->name('people');
+    Route::get('/people',[PeopleController::class,'index'])->name('people.index');
+    Route::post('/people',[PeopleController::class,'store'])->name('people.store');
+    Route::get('/people/{people}',[PeopleController::class,'edit'])->name('people.edit');
+    Route::put('/people/{people}',[PeopleController::class,'update'])->name('people.update');
 
 });
 require __DIR__.'/auth.php';

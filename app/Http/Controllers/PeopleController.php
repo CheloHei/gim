@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\People;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PeopleController extends Controller
 {
@@ -15,7 +16,10 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        return Inertia::render('People/PeopleLayout');
+
+        return Inertia::render('People/PeopleLayout',[
+            'peoples' => People::all(),
+        ]);
     }
 
     /**
@@ -36,7 +40,8 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        People::create($request->all());
+        return Redirect::route('people.index');
     }
 
     /**
@@ -58,7 +63,10 @@ class PeopleController extends Controller
      */
     public function edit(People $people)
     {
-        //
+        return Inertia::render('People/PeopleLayout',[
+            'peoples' => People::all(),
+            'people' => $people,
+        ]);
     }
 
     /**
@@ -70,7 +78,8 @@ class PeopleController extends Controller
      */
     public function update(Request $request, People $people)
     {
-        //
+        $people->update($request->all());
+        return Redirect::route('people.index');
     }
 
     /**

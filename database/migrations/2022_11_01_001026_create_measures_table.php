@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('measures', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('weight');
+            $table->integer('waist');
+            $table->foreignId('people_id')->nullable()->constrained();
         });
     }
 
